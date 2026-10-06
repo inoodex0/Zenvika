@@ -51,7 +51,7 @@ export default function MobileAppSection() {
         aria-hidden="true"
         width={700}
         height={585}
-        className="pointer-events-none absolute -right-24 -top-16 -z-[5] w-64 rotate-[18deg] opacity-25 sm:-right-16 sm:w-80 lg:w-[26rem]"
+        className="pointer-events-none absolute -right-24 -top-16 -z-[5] hidden w-64 rotate-[18deg] opacity-25 sm:-right-16 sm:w-80 sm:block lg:w-[26rem]"
       />
       <img
         src={PHONE_IMG}
@@ -59,7 +59,7 @@ export default function MobileAppSection() {
         aria-hidden="true"
         width={700}
         height={585}
-        className="pointer-events-none absolute -bottom-20 -left-28 -z-[5] w-64 -rotate-[16deg] opacity-25 sm:-left-16 sm:w-80 lg:w-[26rem]"
+        className="pointer-events-none absolute -bottom-20 -left-28 -z-[5] hidden w-64 -rotate-[16deg] opacity-25 xl:block xl:-left-16 xl:w-[26rem]"
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
