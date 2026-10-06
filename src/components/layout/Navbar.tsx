@@ -18,7 +18,7 @@ const text = {
   home: 'Home',
   pricing: 'Pricing',
   solutions: 'Solutions',
-  features: 'Features',
+  demo: 'Demo',
   testimonials: 'Testimonials',
   contactUs: 'Contact Us',
   openStore: 'Open Free Store',
@@ -228,8 +228,8 @@ export default function Navbar() {
           </div>
         )}
       </div>
-      <Link to="/features" className={linkClass} onClick={closeAll}>
-        {text.features}
+      <Link to="/demo" className={linkClass} onClick={closeAll}>
+        {text.demo}
       </Link>
       <Link to="/testimonials" className={linkClass} onClick={closeAll}>
         {text.testimonials}

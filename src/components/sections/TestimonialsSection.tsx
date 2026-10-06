@@ -59,11 +59,11 @@ const TAGS = [
 ] as const;
 
 const SWING = [
-  '-rotate-[2deg]',
-  'rotate-[1.5deg]',
-  'rotate-[2.5deg]',
-  '-rotate-[1.5deg]',
-  'rotate-[1deg]',
+  'sm:-rotate-[2deg]',
+  'sm:rotate-[1.5deg]',
+  'sm:rotate-[2.5deg]',
+  'sm:-rotate-[1.5deg]',
+  'sm:rotate-[1deg]',
 ] as const;
 
 /* tag silhouette: chamfered top corners */
@@ -157,7 +157,7 @@ export default function TestimonialsSection() {
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.05)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_80%)]"
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 py-20 sm:py-28 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-6 py-14 sm:py-20 lg:px-8">
         {/* ───────── Hero shipping label ───────── */}
         <div className="mx-auto max-w-4xl">
           <Reveal variant="rise" delay={60}>
@@ -252,7 +252,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* ───────── Hanging parcel tags ───────── */}
-        <div className="mt-12 grid gap-x-8 gap-y-14 pt-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-x-8 gap-y-12 pt-8 sm:gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((p, i) => {
             const tag = TAGS[i % TAGS.length];
             return (
@@ -270,12 +270,18 @@ export default function TestimonialsSection() {
                 >
                   <div
                     className="relative px-6 pb-6 pt-12 text-slate-800"
-                    style={{ ...tagShape, backgroundColor: tag.tint }}
+                    style={{
+                      ...tagShape,
+                      backgroundColor: tag.tint,
+                      boxShadow: 'inset 0 0 0 1px rgba(15,23,42,0.07)',
+                    }}
                   >
                     <span
                       aria-hidden="true"
                       className="absolute inset-x-0 top-0 h-2"
-                      style={{ backgroundColor: tag.accent }}
+                      style={{
+                        backgroundImage: `linear-gradient(90deg, ${tag.accent}, ${tag.accent}b3)`,
+                      }}
                     />
 
                     <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">

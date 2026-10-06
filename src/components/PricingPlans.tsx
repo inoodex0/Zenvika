@@ -33,22 +33,28 @@ export default function PricingPlans({
             key={plan.name}
             className={
               popular
-                ? 'relative z-10 flex flex-col rounded-lg bg-gradient-to-b from-teal-600 via-emerald-600 to-green-600 p-7 text-white shadow-[0_34px_66px_-30px_rgba(13,148,136,0.75)] lg:-my-6'
-                : 'relative flex flex-col rounded-lg border border-slate-200 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg'
+                ? 'group relative z-10 flex flex-col rounded-2xl bg-gradient-to-b from-teal-600 via-emerald-600 to-green-600 p-7 pt-9 text-white shadow-[0_34px_66px_-30px_rgba(13,148,136,0.75)] ring-1 ring-emerald-400/40 lg:-my-6'
+                : 'group relative flex flex-col rounded-2xl border border-slate-200/80 bg-white p-7 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-teal-300 hover:shadow-[0_24px_48px_-24px_rgba(13,148,136,0.4)]'
             }
           >
+            {/* top accent hairline */}
+            <span
+              aria-hidden="true"
+              className={`absolute inset-x-6 top-0 h-0.5 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                popular ? 'opacity-100' : ''
+              }`}
+            />
+
             {popular ? (
-              <span
-                aria-label="Most popular"
-                className="absolute -end-3 -top-3 flex h-11 w-11 items-center justify-center rounded-xl bg-white/25 ring-1 ring-inset ring-white/40 backdrop-blur-md"
-              >
-                <Star className="h-5 w-5 text-white" fill="currentColor" />
+              <span className="absolute -top-3.5 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-teal-700 shadow-[0_10px_22px_-10px_rgba(15,23,42,0.45)] ring-1 ring-emerald-500/25">
+                <Star className="h-3 w-3 text-amber-400" fill="currentColor" />
+                Most popular
               </span>
             ) : null}
 
             <h3
-              className={`text-2xl font-bold tracking-tight ${
-                popular ? 'text-white' : 'text-slate-900'
+              className={`text-xs font-black uppercase tracking-[0.16em] ${
+                popular ? 'text-white/70' : 'text-slate-400'
               }`}
             >
               {plan.name}
@@ -58,15 +64,17 @@ export default function PricingPlans({
               {plan.price !== null ? (
                 <>
                   <span
-                    className={`text-4xl font-black tracking-[-0.03em] ${
-                      popular ? 'text-white' : 'text-teal-700'
+                    className={`text-[2.6rem] font-black leading-none tracking-[-0.04em] ${
+                      popular ? 'text-white' : 'bg-gradient-to-br from-teal-700 to-emerald-600 bg-clip-text text-transparent'
                     }`}
                   >
                     ${plan.price}
                   </span>
                   <span
-                    className={`text-sm font-bold ${
-                      popular ? 'text-white/80' : 'text-slate-500'
+                    className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide ${
+                      popular
+                        ? 'bg-white/15 text-white/85'
+                        : 'bg-teal-50 text-teal-700'
                     }`}
                   >
                     {plan.period}
@@ -74,20 +82,14 @@ export default function PricingPlans({
                 </>
               ) : (
                 <span
-                  className={`text-4xl font-black tracking-[-0.03em] ${
-                    popular ? 'text-white' : 'text-teal-700'
+                  className={`text-[2.6rem] font-black leading-none tracking-[-0.04em] ${
+                    popular ? 'text-white' : 'bg-gradient-to-br from-teal-700 to-emerald-600 bg-clip-text text-transparent'
                   }`}
                 >
                   {plan.period}
                 </span>
               )}
             </div>
-
-            <div
-              className={`mt-5 border-t ${
-                popular ? 'border-white/25' : 'border-slate-200'
-              }`}
-            />
 
             <p
               className={`mt-5 min-h-10 text-sm leading-relaxed ${
@@ -97,15 +99,24 @@ export default function PricingPlans({
               {plan.tagline}
             </p>
 
-            <ul className="mt-5 space-y-3">
+            <div
+              className={`mt-5 border-t border-dashed ${
+                popular ? 'border-white/25' : 'border-slate-200'
+              }`}
+            />
+
+            <ul className="mt-5 space-y-2.5">
               {plan.features.map((feature) => (
                 <li key={feature} className="flex items-start gap-2.5 text-sm">
-                  <Check
-                    className={`mt-0.5 h-4 w-4 shrink-0 ${
-                      popular ? 'text-white' : 'text-teal-700'
+                  <span
+                    className={`mt-0.5 grid h-4.5 w-4.5 shrink-0 place-items-center rounded-full ${
+                      popular
+                        ? 'bg-white/20 text-white'
+                        : 'bg-teal-50 text-teal-700'
                     }`}
-                    strokeWidth={3}
-                  />
+                  >
+                    <Check className="h-2.5 w-2.5" strokeWidth={4} />
+                  </span>
                   <span
                     className={popular ? 'text-white/90' : 'text-slate-600'}
                   >
@@ -116,16 +127,11 @@ export default function PricingPlans({
             </ul>
 
             <div className="mt-auto pt-7">
-              <div
-                className={`border-t ${
-                  popular ? 'border-white/25' : 'border-slate-200'
-                }`}
-              />
               <Link
                 to={plan.href}
-                className={`mt-6 block w-full rounded-md px-6 py-3.5 text-center text-sm font-bold transition-all duration-300 ${
+                className={`block w-full rounded-xl px-6 py-3.5 text-center text-sm font-bold transition-all duration-300 ${
                   popular
-                    ? 'bg-white text-emerald-700 hover:bg-emerald-50'
+                    ? 'bg-white text-emerald-700 shadow-[0_14px_28px_-14px_rgba(15,23,42,0.5)] hover:-translate-y-0.5 hover:bg-emerald-50'
                     : 'bg-gradient-to-r from-teal-600 to-green-600 text-white shadow-[0_14px_28px_-14px_rgba(5,150,105,0.9)] hover:-translate-y-0.5 hover:shadow-[0_18px_34px_-14px_rgba(5,150,105,1)]'
                 }`}
               >
@@ -133,7 +139,7 @@ export default function PricingPlans({
               </Link>
               <a
                 href={learnMoreHref}
-                className={`mt-4 block py-1.5 text-center text-sm font-bold transition-colors ${
+                className={`mt-4 block py-1.5 text-center text-sm font-bold underline-offset-4 transition-colors hover:underline ${
                   popular
                     ? 'text-white/90 hover:text-white'
                     : 'text-teal-700 hover:text-teal-800'
